@@ -1,0 +1,11 @@
+FROM centos:7
+RUN set -ex \
+       && yum update -y \
+       && yum install -y openssh-server openssh-clients openssh-askpass
+RUN set -ex \
+       && mkdir -p /home/mysql/conf \
+       && mkdir -p /home/mysql/data \
+       && mkdir -p /home/mysql/log \
+COPY start.sh /bin/start.sh
+RUN ["chmod", "+x", "/bin/start.sh"]
+ENTRYPOINT ["/bin/start.sh"]
